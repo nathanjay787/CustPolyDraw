@@ -11,10 +11,16 @@ import UIKit
 class Shape {
     var X:Double
     var Y:Double
+    var stroke:CGColor
+    var fill:CGColor
+    var line:Double
     
-    init(X:Double, Y:Double) {
+    init(X:Double, Y:Double, stroke: CGColor, fill: CGColor, line:Double) {
         self.X = X
         self.Y = Y
+        self.stroke = stroke
+        self.fill = fill
+        self.line = line
     }
     
     func draw(_ theContext:CGContext){}

@@ -23,13 +23,13 @@ class DrawingView: UIView {
         
         if let theContext = possibleContext {
             theContext.setLineWidth(1.0)
-            let colorSpace = CGColorSpaceCreateDeviceRGB()
-            let components:[CGFloat] = [0.0, 0.0, 0.0, 1.0, 1.0]
-            //let components:[CGFloat] = [0.0]
-            let color = CGColor(colorSpace: colorSpace, components: components)
-            theContext.setStrokeColor(color!)
+            //let colorSpace = CGColorSpaceCreateDeviceRGB()
+            //let components:[CGFloat] = [0.0, 0.0, 0.0, 1.0]
+            //let color = CGColor(colorSpace: colorSpace, components: components)
+            //theContext.setStrokeColor(color!)
             
             for aShape in self.theShapes {
+                //let strokeColor = aShape.stroke
                 aShape.draw(theContext)
             }
             
@@ -37,7 +37,7 @@ class DrawingView: UIView {
                 self.thePartialShape.draw(theContext)
             }
             
-            theContext.strokePath()
+            //theContext.strokePath()
         }
     }
     
@@ -55,24 +55,40 @@ class DrawingView: UIView {
         let topLeftPoint = CGPoint(x: self.initialPoint.x < newPoint.x ? self.initialPoint.x : newPoint.x,
                                    y: self.initialPoint.y < newPoint.y ? self.initialPoint.y : newPoint.y)
         
+        let theStroke = Color.red!
+        let theFill = Color.black!
+        let theLine = 1.0
+        
         if self.isThereAPartialShape {//changed from a single if-else to switch statement
             switch (shapeType){
                 case 0:
                 self.thePartialShape = Rect(X: Double(topLeftPoint.x),
                                             Y: Double(topLeftPoint.y),
                                             theHeight: abs(Double(self.initialPoint.y-newPoint.y)),
-                                            theWidth: abs(Double(self.initialPoint.x-newPoint.x)))
+                                            theWidth: abs(Double(self.initialPoint.x-newPoint.x)),
+                                            stroke: theStroke,
+                                            fill: theFill,
+                                            line: theLine
+                )
             //} else {
                 case 1:
                 self.thePartialShape = Oval(X: Double(topLeftPoint.x),
                                             Y: Double(topLeftPoint.y),
                                             theHeight: abs(Double(self.initialPoint.y-newPoint.y)),
-                                            theWidth: abs(Double(self.initialPoint.x-newPoint.x)))
+                                            theWidth: abs(Double(self.initialPoint.x-newPoint.x)),
+                                            stroke: theStroke,
+                                            fill: theFill,
+                                            line: theLine
+                )
                 case 2:
                 self.thePartialShape = Line(X: Double(self.initialPoint.x),//MUST BE FIXED: CHANGE TO LINE STUFF
                                             Y: Double(self.initialPoint.y),
                                             theHeight: Double(newPoint.y),
-                                            theWidth: Double(newPoint.x))
+                                            theWidth: Double(newPoint.x),
+                                            stroke: theStroke,
+                                            fill: theFill,
+                                            line: theLine
+                )
                 default:
                 break
             }
