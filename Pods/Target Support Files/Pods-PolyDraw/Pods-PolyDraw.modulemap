@@ -1,0 +1,6 @@
+framework module Pods_PolyDraw {
+  umbrella header "Pods-PolyDraw-umbrella.h"
+
+  export *
+  module * { export * }
+}

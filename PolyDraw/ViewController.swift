@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var attributes: DrawOptions = DrawOptions()
 
     @IBAction func shapeChosen(_ sender: UISegmentedControl) {
         self.drawingView.shapeType = sender.selectedSegmentIndex
@@ -18,6 +19,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.drawingView.shapeOptions = self
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -25,7 +27,15 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func undoShape(_ sender: UIButton) {
+        
+    }
 
-
+    @IBAction func doOptions(_ sender: UIBarButtonItem) {
+        present(OptionsViewController(), animated: true, completion: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextVC = segue.destination as! OptionsViewController
+        nextVC.shapeOptions = self
+    }
 }
-

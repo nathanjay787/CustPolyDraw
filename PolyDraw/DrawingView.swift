@@ -16,6 +16,8 @@ class DrawingView: UIView {
     var isThereAPartialShape : Bool = false
     var thePartialShape : Shape!
     
+    var shapeOptions: ViewController!
+    
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
@@ -41,6 +43,7 @@ class DrawingView: UIView {
         }
     }
     
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first! as UITouch
         self.initialPoint = touch.location(in: self)
@@ -55,9 +58,9 @@ class DrawingView: UIView {
         let topLeftPoint = CGPoint(x: self.initialPoint.x < newPoint.x ? self.initialPoint.x : newPoint.x,
                                    y: self.initialPoint.y < newPoint.y ? self.initialPoint.y : newPoint.y)
         
-        let theStroke = Color.red!
-        let theFill = Color.black!
-        let theLine = 1.0
+        let theStroke = shapeOptions.attributes.lineColor//Color.red!
+        let theFill = shapeOptions.attributes.fillColor//Color.black!
+        let theLine = Double(shapeOptions.attributes.lineWidth)//1.0
         
         if self.isThereAPartialShape {//changed from a single if-else to switch statement
             switch (shapeType){
@@ -100,6 +103,7 @@ class DrawingView: UIView {
         self.theShapes.append(self.thePartialShape)
         self.isThereAPartialShape = false
     }
+    
 }
 
 

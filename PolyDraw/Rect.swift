@@ -27,6 +27,7 @@ class Rect:Shape {
         
         theContext.addRect(rect)
         theContext.strokePath()
+        theContext.addRect(rect)
         theContext.fillPath()
     }
 }

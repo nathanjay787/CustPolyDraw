@@ -27,6 +27,7 @@ class Oval:Shape {
         
         theContext.addEllipse(in: rect)
         theContext.strokePath()
+        theContext.addEllipse(in: rect)
         theContext.fillPath()
     }
 }
